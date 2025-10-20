@@ -1,43 +1,90 @@
-// TicTacToe
+//----------------------------------------
+//      TicTacToe Mobile Game
+//----------------------------------------
+
 use Libraries.Interface.Forms.Form
 use Libraries.Interface.Forms.Page
 use Libraries.Interface.Forms.Grouping
 use Libraries.Interface.Forms.FormLabel
-use Libraries.Interface.Controls.TextBox
-use Libraries.Interface.Controls.TextField
-use Libraries.Interface.Controls.ToggleButton
-use Libraries.Interface.Controls.RadioButton
 use Libraries.Interface.Forms.Banner
+use Libraries.Interface.Controls.Button
 
 Form form
 Page page = form:GetMainPage()
 
-// Title + board container
-page:AddBanner("Tic Tac Toe")
+
+// Banner for game title
+page:AddBanner("Quorum Tic Tac Toe")
+
+// Banner for player select
+page:AddBanner("X or O")
+
+// Grouping for player select buttons
+Grouping row0 = page:AddGrouping("Row 0")
+
+// Player select buttons
+Button playerX
+playerX:SetDescription("Button to select X")
+Button playerO
+playerO:SetDescription("Button to select O")
+row0:Add(playerX)
+playerX:SetToHugeFont()
+row0:Add(playerO)
+playerO:SetToHugeFont()
+
+// Banner for board section
 page:AddBanner("Board")
 
+// Grouping for board buttons
 Grouping row1 = page:AddGrouping("Row 1")
 Grouping row2 = page:AddGrouping("Row 2")
 Grouping row3 = page:AddGrouping("Row 3")
 
 // Row 1
-row1:AddButton("-")
-row1:AddButton("-")
-row1:AddButton("-")
+Button b1_r1
+b1_r1:SetDescription("Button 1 Row 1")
+Button b2_r1
+b2_r1:SetDescription("Button 2 Row 1")
+Button b3_r1
+b3_r1:SetDescription("Button 3 Row 1")
+row1:Add(b1_r1)
+b1_r1:SetToHugeFont()
+row1:Add(b2_r1)
+b2_r1:SetToHugeFont()
+row1:Add(b3_r1)
+b3_r1:SetToHugeFont()
 
 // Row 2
-row2:AddButton("-")
-row2:AddButton("-")
-row2:AddButton("-")
+Button b1_r2
+b1_r2:SetDescription("Button 1 Row 2")
+Button b2_r2
+b2_r2:SetDescription("Button 2 Row 2")
+Button b3_r2
+b3_r2:SetDescription("Button 3 Row 2")
+row2:Add(b1_r2)
+b1_r2:SetToHugeFont()
+row2:Add(b2_r2)
+b2_r2:SetToHugeFont()
+row2:Add(b3_r2)
+b3_r2:SetToHugeFont()
 
 // Row 3
-row3:AddButton("-")
-row3:AddButton("-")
-row3:AddButton("-")
+Button b1_r3
+b1_r3:SetDescription("Button 1 Row 3")
+Button b2_r3
+b2_r3:SetDescription("Button 2 Row 3")
+Button b3_r3
+b3_r3:SetDescription("Button 3 Row 3")
+row3:Add(b1_r3)
+b1_r3:SetToHugeFont()
+row3:Add(b2_r3)
+b2_r3:SetToHugeFont()
+row3:Add(b3_r3)
+b3_r3:SetToHugeFont()
 
 // Display
 form:Display()
 
 //----------------------------------------
-//              WORKING
+//              END OF FILE
 //----------------------------------------
