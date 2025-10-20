@@ -1,0 +1,43 @@
+// TicTacToe
+use Libraries.Interface.Forms.Form
+use Libraries.Interface.Forms.Page
+use Libraries.Interface.Forms.Grouping
+use Libraries.Interface.Forms.FormLabel
+use Libraries.Interface.Controls.TextBox
+use Libraries.Interface.Controls.TextField
+use Libraries.Interface.Controls.ToggleButton
+use Libraries.Interface.Controls.RadioButton
+use Libraries.Interface.Forms.Banner
+
+Form form
+Page page = form:GetMainPage()
+
+// Title + board container
+page:AddBanner("Tic Tac Toe")
+page:AddBanner("Board")
+
+Grouping row1 = page:AddGrouping("Row 1")
+Grouping row2 = page:AddGrouping("Row 2")
+Grouping row3 = page:AddGrouping("Row 3")
+
+// Row 1
+row1:AddButton("-")
+row1:AddButton("-")
+row1:AddButton("-")
+
+// Row 2
+row2:AddButton("-")
+row2:AddButton("-")
+row2:AddButton("-")
+
+// Row 3
+row3:AddButton("-")
+row3:AddButton("-")
+row3:AddButton("-")
+
+// Display
+form:Display()
+
+//----------------------------------------
+//              WORKING
+//----------------------------------------
