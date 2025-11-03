@@ -8,143 +8,83 @@ use Libraries.Interface.Forms.Grouping
 use Libraries.Interface.Forms.FormLabel
 use Libraries.Interface.Forms.Banner
 use Libraries.Interface.Controls.Button
+use Libraries.Interface.Forms.FormBehavior
+use Libraries.Interface.Events.BehaviorEvent
 use Libraries.Game.Game
 use Libraries.Game.Graphics.Color
 use Libraries.Game.Graphics.ColorGroup
 use Libraries.Game.Graphics.Gradient
 use Libraries.Game.Graphics.Drawable
 
-Form form
-Page page = form:GetMainPage()
+class Main
+    action Main
+        Form form
+        Page page = form:GetMainPage()
 
+        Color buttonColor
+        buttonColor:SetBlue(5000)
+      
+        page:AddBanner("Quorum Tic Tac Toe")
+        
+        // Group the rows
+        Grouping row1 = page:AddGrouping("Row 1")
+        Grouping row2 = page:AddGrouping("Row 2")
+        Grouping row3 = page:AddGrouping("Row 3")
 
-Color buttonColor
-buttonColor:SetBlue(5000)
-Color fontColor
-fontColor:SetGreen(500)
+        page:AddBanner("Choose Your Team!")
+        Grouping row0 = page:AddGrouping("Row 0")
 
+        // Adding cells 'blocks' for game
+        Button b1_r1 = AddCell(row1, "Button 1 Row 1", buttonColor)
+        Button b2_r1 = AddCell(row1, "Button 2 Row 1", buttonColor)
+        Button b3_r1 = AddCell(row1, "Button 3 Row 1", buttonColor)
 
-// Banner for game title
-page:AddBanner("Quorum Tic Tac Toe")
+        Button b1_r2 = AddCell(row2, "Button 1 Row 2", buttonColor)
+        Button b2_r2 = AddCell(row2, "Button 2 Row 2", buttonColor)
+        Button b3_r2 = AddCell(row2, "Button 3 Row 2", buttonColor)
 
-// Grouping for board buttons
-Grouping row1 = page:AddGrouping("Row 1")
-Grouping row2 = page:AddGrouping("Row 2")
-Grouping row3 = page:AddGrouping("Row 3")
+        Button b1_r3 = AddCell(row3, "Button 1 Row 3", buttonColor)
+        Button b2_r3 = AddCell(row3, "Button 2 Row 3", buttonColor)
+        Button b3_r3 = AddCell(row3, "Button 3 Row 3", buttonColor)
 
-// Banner for player select
-page:AddBanner("Choose Your Team!")
+        // For player X
+        Button playerX
+        playerX:SetName("X")
+        playerX:SetCornerRounding(0,0,0,0)
+        playerX:SetDescription("Button to select X")
+        row0:Add(playerX)
+        playerX:SetToHugeFont()
 
-// Grouping for player select buttons
-Grouping row0 = page:AddGrouping("Row 0")
+        // For player O
+        Button playerO
+        playerO:SetName("O")
+        playerO:SetCornerRounding(0,0,0,0)
+        playerO:SetDescription("Button to select O")
+        row0:Add(playerO)
+        playerO:SetToHugeFont()
 
-// Row 1
-Button b1_r1
-b1_r1:SetBorderColor(buttonColor)
-b1_r1:SetBorderThickness(5)
-b1_r1:SetName(" ")
-b1_r1:SetCornerRounding(0,0,0,0)
-b1_r1:SetDescription("Button 1 Row 1")
+        page:AddBanner("")
+        form:Display()
+    end
 
-Button b2_r1
-b2_r1:SetBorderColor(buttonColor)
-b2_r1:SetBorderThickness(5)
-b2_r1:SetName(" ")
-b2_r1:SetCornerRounding(0,0,0,0)
-b2_r1:SetDescription("Button 2 Row 1")
+    // Creates a cell, styles it, adds behavior, and returns it
+    action AddCell(Grouping row, text description, Color border) returns Button
+        Button b
+        b:SetBorderColor(border)
+        b:SetBorderThickness(5)
+        b:SetName("   ")
+        b:SetCornerRounding(0,0,0,0)
+        b:SetDescription(description)
+        row:Add(b)
+        b:SetToHugeFont()
 
-Button b3_r1
-b3_r1:SetBorderColor(buttonColor)
-b3_r1:SetBorderThickness(5)
-b3_r1:SetName(" ")
-b3_r1:SetCornerRounding(0,0,0,0)
-b3_r1:SetDescription("Button 3 Row 1")
+        CellBehavior CB
+        CB:SetCell(b)
+        b:SetBehavior(CB)
 
-row1:Add(b1_r1)
-b1_r1:SetToHugeFont()
-row1:Add(b2_r1)
-b2_r1:SetToHugeFont()
-row1:Add(b3_r1)
-b3_r1:SetToHugeFont()
-
-// Row 2
-Button b1_r2
-b1_r2:SetBorderColor(buttonColor)
-b1_r2:SetBorderThickness(5)
-b1_r2:SetName(" ")
-b1_r2:SetCornerRounding(0,0,0,0)
-b1_r2:SetDescription("Button 1 Row 2")
-
-Button b2_r2
-b2_r2:SetBorderColor(buttonColor)
-b2_r2:SetBorderThickness(5)
-b2_r2:SetName(" ")
-b2_r2:SetCornerRounding(0,0,0,0)
-b2_r2:SetDescription("Button 2 Row 2")
-
-Button b3_r2
-b3_r2:SetBorderColor(buttonColor)
-b3_r2:SetBorderThickness(5)
-b3_r2:SetName(" ")
-b3_r2:SetCornerRounding(0,0,0,0)
-b3_r2:SetDescription("Button 3 Row 2")
-
-row2:Add(b1_r2)
-b1_r2:SetToHugeFont()
-row2:Add(b2_r2)
-b2_r2:SetToHugeFont()
-row2:Add(b3_r2)
-b3_r2:SetToHugeFont()
-
-// Row 3
-Button b1_r3
-b1_r3:SetBorderColor(buttonColor)
-b1_r3:SetBorderThickness(5)
-b1_r3:SetName(" ")
-b1_r3:SetCornerRounding(0,0,0,0)
-b1_r3:SetDescription("Button 1 Row 3")
-
-Button b2_r3
-b2_r3:SetBorderColor(buttonColor)
-b2_r3:SetBorderThickness(5)
-b2_r3:SetName(" ")
-b2_r3:SetCornerRounding(0,0,0,0)
-b2_r3:SetDescription("Button 2 Row 3")
-
-Button b3_r3
-b3_r3:SetBorderColor(buttonColor)
-b3_r3:SetBorderThickness(5)
-b3_r3:SetName(" ")
-b3_r3:SetCornerRounding(0,0,0,0)
-b3_r3:SetDescription("Button 3 Row 3")
-
-row3:Add(b1_r3)
-b1_r3:SetToHugeFont()
-row3:Add(b2_r3)
-b2_r3:SetToHugeFont()
-row3:Add(b3_r3)
-b3_r3:SetToHugeFont()
-
-// Player select buttons
-Button playerX
-playerX:SetName("X")
-playerX:SetCornerRounding(0,0,0,0)
-playerX:SetDescription("Button to select X")
-
-Button playerO
-playerO:SetName("O")
-playerO:SetCornerRounding(0,0,0,0)
-playerO:SetDescription("Button to select O")
-row0:Add(playerX)
-playerX:SetToHugeFont()
-row0:Add(playerO)
-playerO:SetToHugeFont()
-
-// Banner for board section
-page:AddBanner("")
-
-// Display
-form:Display()
+        return b
+    end
+end
 
 //----------------------------------------
 //              END OF FILE
